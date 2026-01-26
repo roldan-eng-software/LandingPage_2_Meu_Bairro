@@ -25,12 +25,14 @@ meubairro-landing/
 ## 🚀 Deploy no GitHub Pages
 
 ### Passo 1: Crie um repositório no GitHub
+
 1. Vá para [github.com/new](https://github.com/new)
 2. Nome do repositório: `meubairro-landing` (ou outro de sua preferência)
 3. Deixe como **Público**
 4. Clique em **Create repository**
 
 ### Passo 2: Faça o push do código
+
 ```bash
 cd /caminho/para/meubairro-landing
 
@@ -52,6 +54,7 @@ git push -u origin main
 ```
 
 ### Passo 3: Ative o GitHub Pages
+
 1. Vá para **Settings** do repositório
 2. No menu lateral, clique em **Pages**
 3. Em **Source**, selecione **Deploy from a branch**
@@ -59,7 +62,9 @@ git push -u origin main
 5. Clique em **Save**
 
 ### Passo 4: Acesse sua landing page
+
 Após alguns minutos, sua página estará disponível em:
+
 ```
 https://SEU_USUARIO.github.io/meubairro-landing/
 ```
@@ -69,9 +74,11 @@ https://SEU_USUARIO.github.io/meubairro-landing/
 Para o formulário de captura de leads funcionar, configure o EmailJS:
 
 ### 1. Crie uma conta
+
 Acesse [emailjs.com](https://www.emailjs.com/) e crie uma conta gratuita.
 
 ### 2. Crie um Email Service
+
 1. Vá para **Email Services**
 2. Clique em **Add New Service**
 3. Escolha seu provedor (Gmail, Outlook, etc.)
@@ -81,9 +88,11 @@ Acesse [emailjs.com](https://www.emailjs.com/) e crie uma conta gratuita.
 ### 3. Crie os Templates
 
 #### Template para o Usuário (template_user)
+
 - Vá para **Email Templates** → **Create New Template**
 - Assunto: `Bem-vindo ao MeuBairro! Suas Dicas Exclusivas Estão a Caminho`
 - Conteúdo:
+
 ```
 Olá {{nome}},
 
@@ -98,12 +107,15 @@ Em breve entraremos em contato com conteúdo personalizado para você.
 Abraços,
 Equipe MeuBairro
 ```
+
 - Anote o **Template ID**
 
 #### Template para Admin (template_admin)
+
 - Crie outro template
 - Assunto: `Novo Lead Capturado - {{nome}}`
 - Conteúdo:
+
 ```
 Novo lead capturado no MeuBairro!
 
@@ -113,13 +125,16 @@ Tipo de Serviço: {{servico}}
 
 Hora do registro: {{time}}
 ```
+
 - Anote o **Template ID**
 
 ### 4. Obtenha sua Public Key
+
 1. Vá para **Account** → **General**
 2. Copie sua **Public Key**
 
 ### 5. Configure no código
+
 Abra `js/main.js` e substitua as configurações:
 
 ```javascript
@@ -134,6 +149,7 @@ const EMAILJS_CONFIG = {
 ## 📱 WhatsApp
 
 O botão flutuante do WhatsApp já está configurado para:
+
 - **Número:** +55 16 98144-2301
 - **Mensagem padrão:** "Olá! Gostaria de saber mais sobre o MeuBairro"
 
@@ -142,6 +158,7 @@ Para alterar, edite os links `wa.me` no `index.html`.
 ## 🎨 Personalização
 
 ### Cores
+
 As cores podem ser alteradas no início do arquivo `css/style.css`:
 
 ```css
@@ -154,9 +171,11 @@ As cores podem ser alteradas no início do arquivo `css/style.css`:
 ```
 
 ### Fontes
+
 A fonte padrão é **Inter** do Google Fonts. Para trocar, edite o `<link>` no `<head>` do HTML.
 
 ### Imagens
+
 Substitua os arquivos na pasta `images/` mantendo os mesmos nomes, ou altere os caminhos no HTML.
 
 ## ✅ Funcionalidades
@@ -185,21 +204,22 @@ Para adicionar Google Analytics, insira antes do `</head>`:
 
 ```html
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8NYQNV4GPP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-8NYQNV4GPP');
 </script>
 ```
 
-Substitua `G-XXXXXXXXXX` pelo seu ID do GA4.
+Substitua `G-8NYQNV4GPP` pelo seu ID do GA4.
 
 ## 🆘 Suporte
 
 Dúvidas? Entre em contato:
-- 📧 Email: contato@meubairro.dev.br
+
+- 📧 Email: <contato@meubairro.dev.br>
 - 📱 WhatsApp: +55 16 98144-2301
 
 ## 📄 Licença
