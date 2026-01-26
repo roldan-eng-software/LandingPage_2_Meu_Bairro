@@ -183,6 +183,17 @@ function initLeadForm() {
     });
   }
 
+  // Validação em tempo real para WhatsApp
+  const whatsappInput = form.querySelector('#whatsapp');
+  if (whatsappInput) {
+    whatsappInput.addEventListener('blur', () => validateWhatsApp(whatsappInput));
+    whatsappInput.addEventListener('input', () => {
+      if (whatsappInput.classList.contains('error')) {
+        validateWhatsApp(whatsappInput);
+      }
+    });
+  }
+
   // Submit do formulário
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -203,6 +214,7 @@ function initLeadForm() {
       const formData = {
         nome: form.querySelector('#nome').value.trim(),
         email: form.querySelector('#email').value.trim(),
+        whatsapp: form.querySelector('#whatsapp').value.trim(),
         servico: form.querySelector('#servico').value
       };
 
@@ -266,6 +278,12 @@ function validateForm(form) {
     isValid = false;
   }
 
+  // Valida WhatsApp
+  const whatsappInput = form.querySelector('#whatsapp');
+  if (!validateWhatsApp(whatsappInput)) {
+    isValid = false;
+  }
+
   // Valida serviço
   const servicoSelect = form.querySelector('#servico');
   if (!servicoSelect.value) {
@@ -287,6 +305,23 @@ function validateEmail(input) {
     return false;
   } else if (!emailRegex.test(value)) {
     showInputError(input, 'Por favor, insira um email válido');
+    return false;
+  } else {
+    clearInputError(input);
+    return true;
+  }
+}
+
+function validateWhatsApp(input) {
+  const value = input.value.trim();
+  // Remove todos os caracteres não numéricos
+  const numbersOnly = value.replace(/\D/g, '');
+
+  if (!value) {
+    showInputError(input, 'Por favor, insira seu WhatsApp');
+    return false;
+  } else if (numbersOnly.length < 10 || numbersOnly.length > 11) {
+    showInputError(input, 'Por favor, insira um número válido (DDD + número)');
     return false;
   } else {
     clearInputError(input);
