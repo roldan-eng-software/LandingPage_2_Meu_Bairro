@@ -194,6 +194,25 @@ function initLeadForm() {
     });
   }
 
+  // Mostrar/ocultar campo "Outro Serviço"
+  const servicoSelect = form.querySelector('#servico');
+  const outroServicoGroup = document.getElementById('outroServicoGroup');
+  const outroServicoInput = document.getElementById('outroServico');
+
+  if (servicoSelect && outroServicoGroup) {
+    servicoSelect.addEventListener('change', () => {
+      if (servicoSelect.value === 'Outro') {
+        outroServicoGroup.style.display = 'block';
+        outroServicoInput.setAttribute('required', 'required');
+      } else {
+        outroServicoGroup.style.display = 'none';
+        outroServicoInput.removeAttribute('required');
+        outroServicoInput.value = '';
+        clearInputError(outroServicoInput);
+      }
+    });
+  }
+
   // Submit do formulário
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -217,6 +236,12 @@ function initLeadForm() {
         whatsapp: form.querySelector('#whatsapp').value.trim(),
         servico: form.querySelector('#servico').value
       };
+
+      // Se "Outro" foi selecionado, adiciona o serviço especificado
+      if (formData.servico === 'Outro') {
+        const outroServico = form.querySelector('#outroServico').value.trim();
+        formData.servico = `Outro: ${outroServico}`;
+      }
 
       // Verifica se EmailJS está configurado
       if (EMAILJS_CONFIG.publicKey !== 'YOUR_PUBLIC_KEY' && typeof emailjs !== 'undefined') {
@@ -291,6 +316,17 @@ function validateForm(form) {
     isValid = false;
   } else {
     clearInputError(servicoSelect);
+  }
+
+  // Valida "Outro Serviço" se "Outro" foi selecionado
+  if (servicoSelect.value === 'Outro') {
+    const outroServicoInput = form.querySelector('#outroServico');
+    if (!outroServicoInput.value.trim()) {
+      showInputError(outroServicoInput, 'Por favor, especifique qual serviço você oferece');
+      isValid = false;
+    } else {
+      clearInputError(outroServicoInput);
+    }
   }
 
   return isValid;
