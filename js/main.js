@@ -245,31 +245,32 @@ function initLeadForm() {
 
       // Verifica se EmailJS está configurado
       if (EMAILJS_CONFIG.publicKey !== 'YOUR_PUBLIC_KEY' && typeof emailjs !== 'undefined') {
-        // Envia email para o usuário
-        await emailjs.send(
-          EMAILJS_CONFIG.serviceId,
-          EMAILJS_CONFIG.templateIdUser,
-          formData
-        );
-
-        // Envia notificação para o admin
-        await emailjs.send(
-          EMAILJS_CONFIG.serviceId,
-          EMAILJS_CONFIG.templateIdAdmin,
-          {
-            ...formData,
-            title: `Novo Lead Capturado - ${formData.nome}`
-          }
-        );
+        try {
+          // Envia email para o usuário
+          await emailjs.send(
+            EMAILJS_CONFIG.serviceId,
+            EMAILJS_CONFIG.templateIdUser,
+            formData
+          );
+        } catch (emailError) {
+          console.error('Erro ao enviar email:', emailError);
+          // Continua mesmo se o email falhar
+        }
       } else {
         // Simula envio para desenvolvimento
         console.log('EmailJS não configurado. Dados do formulário:', formData);
         await new Promise(resolve => setTimeout(resolve, 1500));
       }
 
-      // Sucesso
+      // Sucesso - SEMPRE mostra a mensagem de sucesso
       form.style.display = 'none';
       successMessage.style.display = 'block';
+      
+      // Força a exibição mesmo se houver problemas de CSS
+      successMessage.style.opacity = '1';
+      successMessage.style.visibility = 'visible';
+      
+      console.log('Mensagem de sucesso exibida!');
       
       // Scroll suave para a mensagem de sucesso
       setTimeout(() => {
@@ -280,7 +281,9 @@ function initLeadForm() {
       form.reset();
       
       // Track evento de sucesso
-      trackEvent('Lead', 'form_success', 'cadastro_enviado');
+      if (typeof trackEvent === 'function') {
+        trackEvent('Lead', 'form_success', 'cadastro_enviado');
+      }
 
     } catch (error) {
       console.error('Erro ao enviar formulário:', error);

@@ -831,11 +831,16 @@ textarea {
 
 .form-success {
   text-align: center;
-  padding: 40px 20px;
+  padding: 50px 30px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 2px solid var(--primary-green);
+  border-radius: var(--radius-xl);
+  margin-top: 20px;
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.5s ease, transform 0.5s ease;
   animation: successFadeIn 0.5s ease forwards;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
 }
 
 @keyframes successFadeIn {
@@ -869,15 +874,16 @@ textarea {
 }
 
 .form-success h3 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: var(--gray-800);
-  margin-bottom: 8px;
+  color: var(--primary-green);
+  margin-bottom: 12px;
 }
 
 .form-success p {
-  color: var(--gray-600);
+  color: var(--gray-700);
   line-height: 1.6;
+  font-size: 1.1rem;
 }
 
 .btn-loading {
