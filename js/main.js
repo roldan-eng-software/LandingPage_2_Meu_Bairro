@@ -270,9 +270,17 @@ function initLeadForm() {
       // Sucesso
       form.style.display = 'none';
       successMessage.style.display = 'block';
+      
+      // Scroll suave para a mensagem de sucesso
+      setTimeout(() => {
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
 
       // Reset form
       form.reset();
+      
+      // Track evento de sucesso
+      trackEvent('Lead', 'form_success', 'cadastro_enviado');
 
     } catch (error) {
       console.error('Erro ao enviar formulário:', error);
