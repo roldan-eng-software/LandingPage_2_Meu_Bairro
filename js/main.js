@@ -12,6 +12,7 @@ const EMAILJS_CONFIG = {
   publicKey: 'RR9BbO6bfvuFkgz3p', // Substitua pelo seu Public Key
   serviceId: 'service_ozhjk4g', // Substitua pelo seu Service ID
   templateIdUser: 'template_kop5bjg', // Template para o usuário
+  templateIdAdmin: 'template_5k7qurz', // Template para o admin
 };
 
 // ============================================
@@ -50,6 +51,7 @@ function initSmoothScroll() {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
+      const planoSelecionado = this.getAttribute('data-plano');
 
       if (target) {
         // Fecha o menu mobile se estiver aberto
@@ -63,6 +65,25 @@ function initSmoothScroll() {
           top: offsetPosition,
           behavior: 'smooth'
         });
+
+        // Se o link tem um plano associado, pré-seleciona no formulário
+        if (planoSelecionado && target.id === 'lead-capture') {
+          setTimeout(() => {
+            const planoSelect = document.querySelector('#plano');
+            if (planoSelect) {
+              planoSelect.value = planoSelecionado;
+              // Remove qualquer erro anterior
+              clearInputError(planoSelect);
+              // Scroll suave para o formulário após selecionar o plano
+              setTimeout(() => {
+                const form = document.getElementById('leadForm');
+                if (form) {
+                  form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }, 300);
+            }
+          }, 500);
+        }
       }
     });
   });
@@ -234,7 +255,8 @@ function initLeadForm() {
         nome: form.querySelector('#nome').value.trim(),
         email: form.querySelector('#email').value.trim(),
         whatsapp: form.querySelector('#whatsapp').value.trim(),
-        servico: form.querySelector('#servico').value
+        servico: form.querySelector('#servico').value,
+        plano: form.querySelector('#plano').value
       };
 
       // Se "Outro" foi selecionado, adiciona o serviço especificado
@@ -338,6 +360,15 @@ function validateForm(form) {
     } else {
       clearInputError(outroServicoInput);
     }
+  }
+
+  // Valida plano
+  const planoSelect = form.querySelector('#plano');
+  if (!planoSelect.value) {
+    showInputError(planoSelect, 'Por favor, selecione um plano');
+    isValid = false;
+  } else {
+    clearInputError(planoSelect);
   }
 
   return isValid;

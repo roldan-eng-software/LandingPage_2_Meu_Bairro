@@ -274,7 +274,7 @@
               </svg><span>Suporte por email</span></li>
           </ul>
           <div class="pricing-footer">
-            <a href="#lead-capture" class="btn btn-primary" style="width: 100%;">Começar Teste Grátis</a>
+            <a href="#lead-capture" class="btn btn-primary" data-plano="Profissional" style="width: 100%;">Começar Teste Grátis</a>
           </div>
         </div>
         <!-- Plano Premium -->
@@ -310,7 +310,7 @@
               </svg><span>Suporte prioritário</span></li>
           </ul>
           <div class="pricing-footer">
-            <a href="#lead-capture" class="btn btn-accent" style="width: 100%;">Começar Teste Grátis</a>
+            <a href="#lead-capture" class="btn btn-accent" data-plano="Premium" style="width: 100%;">Começar Teste Grátis</a>
           </div>
         </div>
       </div>
@@ -357,6 +357,14 @@
           <div class="form-group" id="outroServicoGroup" style="display: none;">
             <label for="outroServico">Qual serviço você oferece?</label>
             <input type="text" id="outroServico" name="outroServico" placeholder="Digite o serviço que você oferece">
+          </div>
+          <div class="form-group">
+            <label for="plano">Qual plano deseja?</label>
+            <select id="plano" name="plano" required>
+              <option value="">Selecione um plano</option>
+              <option value="Profissional">Profissional - R$ 19,90/mês</option>
+              <option value="Premium">Premium - R$ 89,90/mês</option>
+            </select>
           </div>
           <button type="submit" class="btn btn-accent btn-lg" style="width: 100%;">Enviar dados para cadastro</button>
         </form>
