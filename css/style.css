@@ -400,6 +400,31 @@ textarea {
   margin-top: 2rem;
 }
 
+.hero-referral-banner {
+  margin-top: 1rem;
+  padding: 14px 20px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, rgba(250, 204, 21, 0.12), rgba(16, 185, 129, 0.16));
+  border: 1px solid rgba(250, 204, 21, 0.9);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--white);
+  max-width: 520px;
+}
+
+.hero-referral-text {
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.hero-referral-text strong {
+  color: #FEF9C3;
+}
+
 .hero-image {
   display: flex;
   justify-content: center;
